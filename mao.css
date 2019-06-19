@@ -1,0 +1,258 @@
+html, body, div, span, p, ul, li {
+  margin: 0;
+  padding: 0;
+}
+ul li{
+  list-style: none;
+}
+#box {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+}
+
+#box .sbox {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1;
+}
+
+#box header {
+  width: 100%;
+  height: 50.5px;
+  text-align: center;
+  line-height: 50.5px;
+  color: white;
+  background: #e54847;
+  font-size: 18px;
+}
+
+#box nav {
+  background: white;
+  height: 44px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  border-bottom: 1px solid #E6E6E6;
+}
+
+#box nav span {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  height: 100%;
+}
+
+#box nav span:first-child {
+  font-size: 15px;
+  color: #777;
+}
+
+#box nav span:last-child {
+  font-size: 20px;
+  font-weight: 600;
+  color: #e54847;
+}
+
+#box nav .active {
+  font-weight: 600;
+  color: #e54847;
+  border-bottom: 2px solid #e54847;
+}
+
+#box .content {
+  margin-top: 95.5px;
+}
+
+#box #newdiv {
+  width: 100%;
+  /* height: 623px; */
+}
+
+#box #newdiv #newul::-webkit-scrollbar {
+  display: none;
+}
+
+#box #newdiv #newul {
+  padding: 10px;
+  list-style: none;
+}
+
+#box #newdiv #newul li {
+  height: 114px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#box #newdiv #newul li img {
+  width: 64px;
+  height: 90px;
+}
+
+#box #newdiv #newul li #middlediv {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 202px;
+  height: 88px;
+}
+
+#box #newdiv #newul li #middlediv .activePin {
+  color: #faaf00;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+#box #newdiv #newul li #middlediv .div1 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#box #newdiv #newul li #middlediv .div1 #spandiv {
+  display: inline-block;
+  width: 43px;
+  height: 16px;
+  border: 1px solid #3c9fe6;
+  margin-left: 6px;
+  font-size: 12px;
+}
+
+#box #newdiv #newul li #middlediv .div1 #spandiv span:first-child {
+  color: white;
+  background: #3c9fe6;
+}
+
+#box #newdiv #newul li #middlediv .div1 #spandiv span:last-child {
+  color: #3c9fe6;
+}
+
+#box #newdiv #newul li #middlediv .div1 > span {
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 17px;
+  color: #333;
+  font-weight: 700;
+}
+
+#box #newdiv #newul li #middlediv p:nth-of-type(2) {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 13px;
+  color: #666;
+}
+
+#box #newdiv #newul li #middlediv p:nth-of-type(3) {
+  width: 100%;
+  font-size: 13px;
+  color: #666;
+}
+
+#box #newdiv #newul li #leftdiv {
+  width: 47px;
+  height: 27px;
+  border-radius: 5px;
+  text-align: center;
+  line-height: 27px;
+  color: white;
+  font-size: 12px;
+}
+
+#box #newdiv #newul li .activeblue {
+  background: #3c9fe6;
+}
+
+#box #newdiv #newul li .activered {
+  background: #f03d37;
+}
+#expect{
+  padding: 15px;
+  /* padding-bottom: 20px; */
+  font-size: 0.875rem;
+}
+#expect>p{
+  height: 40px;
+  line-height: 40px;
+}
+#expect>ul{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  overflow-x: auto;
+}
+#expect>ul::-webkit-scrollbar{
+  display: none;
+}
+#expect>ul li{
+  margin-right: 10px;
+}
+#expect>ul img{
+  width: 85px;
+  height: 115px;
+}
+#expect>ul p{
+  width: 85px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+#expect>ul li>div{
+  font-size: 0.75rem;
+  position: relative;
+}
+#expect>ul li>div:first-child p{
+  position: absolute;
+  bottom: 3px;
+  color: #faaf00;
+  font-weight: bold;
+  text-align: center;
+  background: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,.2));
+}
+#expect>ul li>div:nth-child(2) p:nth-child(1){
+  font-weight: bold;
+}
+#expect>ul li>div:nth-child(2) p:nth-child(2){
+  color: #999;
+}
+#main-content{
+  padding: 0 15px;
+  padding-top: 10px;
+  border-top: 10px solid #f0f0f0;
+}
+#main-content>p{
+  font-size: 0.875rem;
+}
+/*# sourceMappingURL=mao.css.map */

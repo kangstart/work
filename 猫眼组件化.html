@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+    <script src="./axios.js"></script>
+    <link rel="stylesheet" href="./mao.css">
+    <link rel="stylesheet" href="./iconfont.css">
+</head>
+<body>
+    <div id="box">
+        <div class="sbox">
+        <header>猫眼</header>
+        <nav>
+            <span class="iconfont ">深圳&#xe652;</span>
+            <span  @click="com='newshow'" :class="com==newshow?'active':''">正在上映</span>
+            <span  @click="com='willshow'" :class="com==willshow?'active':''">即将上映</span>
+            <span class="iconfont">&#xe611;</span>
+        </nav>
+    </div>
+        <div class="content">
+            <keep-alive>
+                    <component :is="com"></component>
+            </keep-alive>
+        </div>
+    </div>
+    <template id="newshow">
+        <div id="newdiv">
+            <ul id='newul'>
+                <li v-for="item in msg1">
+                    <div><img :src="item.img.replace('w.h','128.180')" alt=""></div>
+                    <div id='middlediv'>
+                        <div class="div1" v-if="item.version.substring(1,3)"><span  style="max-width: 152px;">{{item.nm}}</span><div id="spandiv"><span>{{item.version.substring(1,3)}}</span><span>{{item.version.substr(4)}}</span></div></div>
+                        <div class="div1" v-else-if="item.version == ''"><span style="width:200px">{{item.nm}}</span></div>
+                        <p v-if="item.sc"><span>观众评</span><span class="activePin">{{item.sc}}</span></p>
+                        <p v-else-if="item.sc == 0"><span class="activePin">{{item.wish}}</span><span >人想看</span></p>
+                        <p>主演:{{item.star}}</p>
+                        <p>{{item.showInfo}}</p>
+                    </div>
+                    <div id='leftdiv' v-if="item.sc" class="activered">
+                        购票
+                    </div>
+                    <div id='leftdiv' v-if="item.sc == 0" class="activeblue">
+                        预售
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </template>
+    <template id="willshow">
+        <div id="willdiv">
+        <div id="expect">
+            <p>近期最受期待</p>
+    <ul>
+        <li v-for="item in coming">
+            <div>
+                <img :src="item.img.replace('w.h','170.230')" alt="">
+                <p>{{item.wish}}人想看</p>
+            </div>
+            <div>
+                <p>{{item.nm}}</p>
+                <p>{{item.comingTitle.split(" ")[0]}}</p>
+            </div>
+        </li>
+    </ul>
+        </div>
+        <div id="main-content" >
+            <div v-for="ite in commingsoon">
+                <p >
+                    {{ite.title}}
+                </p>
+            <div id="newdiv">
+                <ul id='newul'>
+                    <li v-for="item in ite.content">
+                        <div><img :src="item.img.replace('w.h','128.180')" alt=""></div>
+                        <div id='middlediv'>
+                            <div class="div1" v-if="item.version.substring(1,3)"><span  style="max-width: 152px;">{{item.nm}}</span><div id="spandiv"><span>{{item.version.substring(1,3)}}</span><span>{{item.version.substr(4)}}</span></div></div>
+                            <div class="div1" v-else-if="item.version == ''"><span style="width:200px">{{item.nm}}</span></div>
+                            <p v-if="item.sc"><span>观众评</span><span class="activePin">{{item.sc}}</span></p>
+                            <p v-else-if="item.sc == 0"><span class="activePin">{{item.wish}}</span><span >人想看</span></p>
+                            <p>主演:{{item.star}}</p>
+                            <p>{{item.showInfo}}</p>
+                        </div>
+                        <div id='leftdiv' v-if="item.sc" class="activered">
+                            购票
+                        </div>
+                        <div id='leftdiv' v-if="item.sc == 0" class="activeblue">
+                            预售
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            </div>
+        </div>
+    </template>
+    <script>
+        var newshow = {
+            template:"#newshow",
+            data(){
+                return {
+                    msg1:''
+                }
+            },
+            created() {
+                axios('https://www.easy-mock.com/mock/5cf867c85a9fd176a4e19854/example/home').then(res=>{
+                    this.msg1=res.data.movieList
+                    console.log(this.msg1)
+                })
+            },
+        }
+        var willshow = {
+            template:"#willshow",
+            data(){
+                return {
+                    msg2:[],
+                    coming:[],
+                    commingsoon:[]
+                }
+            },
+            created() {
+                axios('https://www.easy-mock.com/mock/5cf867c85a9fd176a4e19854/example/coming').then(res=>{
+                    let arr = res.data.coming;
+                   
+            let obj = {};
+            let titles = [];    
+            let myobj = [];     
+            arr.forEach(item=>{
+                let title = item.comingTitle;
+                titles.push(title);
+                if(obj[title]){
+                    obj[title].push(item);
+                }else{
+                    obj[title] = [item]
+                }
+            })
+            let totalTitle = [...new Set(titles)];
+            totalTitle.forEach(one => {
+                myobj.push({"title": one, "content": obj[one]})
+            })
+            console.log(myobj);
+            this.commingsoon = myobj;
+                })
+                axios('https://www.easy-mock.com/mock/5cf867c85a9fd176a4e19854/example/expect').then(res=>{
+                  
+                    this.coming=res.data.coming 
+                    console.log(this.coming)
+                })
+            }
+        }
+        var vm = new Vue({
+            el:'#box',
+            data:{
+                newshow:'newshow',
+                willshow:'willshow',
+                com:'newshow'
+            },
+            methods: {
+                
+            },
+            components:{
+                newshow,
+                willshow
+            }
+        })
+    </script>
+</body>
+</html>
